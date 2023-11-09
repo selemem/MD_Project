@@ -1,0 +1,59 @@
+Book 1
+Cover: cover1.jpg
+Title: The Catcher in the Rye
+Author: J.D. Salinger
+Description: A classic novel about the struggles of adolescence.
+
+Book 2
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 3
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 4
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 5
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 6
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 7
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 8
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 9
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
+
+Book 10
+Cover: cover2.jpg
+Title: To Kill a Mockingbird
+Author: Harper Lee
+Description: A powerful story addressing racial injustice in the American South.
