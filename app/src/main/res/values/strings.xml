@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MD_Project</string>
+    <string name="title_activity_book_details">BookDetailsActivity</string>
+</resources>
