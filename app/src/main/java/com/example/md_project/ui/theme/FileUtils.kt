@@ -43,4 +43,5 @@ fun readBooksFromAssets(context: Context, fileName: String): List<Book> {
         e.printStackTrace()
     }
     return books
+
 }

@@ -17,10 +17,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -30,7 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.md_project.ui.theme.readBooksFromAssets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import coil.compose.rememberImagePainter
+import coil.transform.RoundedCornersTransformation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +53,12 @@ fun Navigation() {
         composable("home") {
             HomePage(navController)
         }
-        composable("bookDetails") {
-            BookDetailsPage(navController = navController)
+        composable("profileDetails") {
+            ProfilePage(navController = navController)
+        }
+        composable("bookDetails/{bookTitle}") { backStackEntry ->
+            val title = backStackEntry.arguments?.getString("bookTitle") ?: ""
+            BookDetailsPage(title = title, onBack = { navController.popBackStack() })
         }
     }
 }
@@ -127,36 +130,48 @@ fun HomePage(navController: NavController) {
                 .fillMaxWidth()
                 .padding(top = 8.dp)
         ) {
+
             items(books) { book ->
                 Card(
                     modifier = Modifier
                         .padding(8.dp)
                         .clickable {
-                            // Navigate to book details or perform other actions
+                            navController.navigate("bookDetails/${book.title}")
                         }
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
-                            .width(120.dp)
-                            .height(200.dp)
+                            .width(142.dp)
+                            .height(250.dp)
                     ) {
-                        // Book cover image
+
                         Image(
-                            painter = painterResource(id = R.drawable.cover1), // Placeholder image
+                            painter = rememberImagePainter(
+                                data = LocalContext.current.resources.getIdentifier(
+                                    book.cover,
+                                    "drawable",
+                                    LocalContext.current.packageName
+                                ),
+                                builder = {
+                                    crossfade(true)
+                                    transformations(RoundedCornersTransformation(8f))
+                                }
+                            ),
                             contentDescription = null,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .clip(shape = RoundedCornerShape(8.dp))
+                                .width(142.dp)
+                                .height(200.dp)
                         )
+
 
                         // Book title
                         Text(
                             text = book.title,
                             modifier = Modifier
-                                .padding(top = 8.dp)
+                                .padding(top = 16.dp)
                         )
+
                     }
                 }
             }

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
-class BookDetailsActivity : ComponentActivity() {
+class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,14 +21,14 @@ class BookDetailsActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                BookDetailsPage(navController = rememberNavController())
+                ProfilePage(navController = rememberNavController())
             }
         }
     }
 }
 
 @Composable
-fun BookDetailsPage(navController: NavController) {
+fun ProfilePage(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
