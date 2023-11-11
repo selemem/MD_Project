@@ -1,5 +1,5 @@
 package com.example.md_project
-
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,8 +28,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.md_project.ui.theme.readBooksFromAssets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import coil.compose.rememberImagePainter
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import coil.transform.RoundedCornersTransformation
+import com.example.md_project.ui.theme.findBookByTitle
+import androidx.compose.foundation.Image
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +65,8 @@ fun Navigation() {
         }
         composable("bookDetails/{bookTitle}") { backStackEntry ->
             val title = backStackEntry.arguments?.getString("bookTitle") ?: ""
-            BookDetailsPage(title = title, onBack = { navController.popBackStack() })
+            val book = findBookByTitle(title)
+            BookDetailsPage(book = book, onBack = { navController.popBackStack() })
         }
     }
 }
@@ -114,7 +122,7 @@ fun HomePage(navController: NavController) {
             // Button with profile icon
             IconButton(
                 onClick = {
-                    navController.navigate("bookDetails")
+                    navController.navigate("profileDetails")
                 }
             ) {
                 Icon(
@@ -130,12 +138,12 @@ fun HomePage(navController: NavController) {
                 .fillMaxWidth()
                 .padding(top = 8.dp)
         ) {
-
             items(books) { book ->
                 Card(
                     modifier = Modifier
                         .padding(8.dp)
                         .clickable {
+                            // Navigate to book details activity
                             navController.navigate("bookDetails/${book.title}")
                         }
                 ) {
@@ -145,7 +153,7 @@ fun HomePage(navController: NavController) {
                             .width(142.dp)
                             .height(250.dp)
                     ) {
-
+                        // Book cover image
                         Image(
                             painter = rememberImagePainter(
                                 data = LocalContext.current.resources.getIdentifier(
@@ -160,18 +168,22 @@ fun HomePage(navController: NavController) {
                             ),
                             contentDescription = null,
                             modifier = Modifier
+                                .fillMaxWidth()
                                 .width(142.dp)
                                 .height(200.dp)
+                                .clip(shape = RoundedCornerShape(8.dp))
                         )
 
-
-                        // Book title
+                        // Book title with padding
                         Text(
                             text = book.title,
                             modifier = Modifier
-                                .padding(top = 16.dp)
+                                .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                .padding(top = 8.dp),
+                            style = TextStyle.Default.copy(
+                                fontWeight = FontWeight.Bold
+                            )
                         )
-
                     }
                 }
             }
@@ -180,6 +192,10 @@ fun HomePage(navController: NavController) {
         // Other existing code...
     }
 }
+
+
+
+
 
 
 
