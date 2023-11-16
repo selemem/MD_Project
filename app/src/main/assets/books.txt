@@ -4,7 +4,7 @@
     "Cover": "cover1",
     "Title": "The Catcher in the Rye",
     "Author": "J.D. Salinger",
-    "Description": "A classic novel about the struggles of adolescence."
+    "Description": "Fleeing the crooks at Pencey Prep, he pinballs around New York City seeking solace in fleeting encounters—shooting the bull with strangers in dive hotels, wandering alone round Central Park, getting beaten up by pimps and cut down by erstwhile girlfriends. The city is beautiful and terrible, in all its neon loneliness and seedy glamour, its mingled sense of possibility and emptiness. Holden passes through it like a ghost, thinking always of his kid sister Phoebe, the only person who really understands him, and his determination to escape the phonies and find a life of true meaning."
   },
   {
     "Book": "2",
