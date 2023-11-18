@@ -1,8 +1,8 @@
 package com.example.md_project
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,16 +29,16 @@ import com.example.md_project.ui.theme.readBooksFromAssets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.findBookByTitle
-import androidx.compose.foundation.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.example.md_project.ui.theme.BookViewModel
 
 class MainActivity : ComponentActivity() {
+    private val bookViewModel by viewModels<BookViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,34 +46,34 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                Navigation()
+                Navigation(bookViewModel = bookViewModel)
             }
         }
     }
 }
 
 @Composable
-fun Navigation() {
+fun Navigation(bookViewModel: BookViewModel) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomePage(navController)
+            HomePage(navController, bookViewModel)
         }
         composable("profileDetails") {
-            ProfilePage(navController = navController)
+            ProfilePage(navController, bookViewModel)
         }
         composable("bookDetails/{bookTitle}") { backStackEntry ->
             val title = backStackEntry.arguments?.getString("bookTitle") ?: ""
             val book = findBookByTitle(title)
-            BookDetailsPage(book = book, onBack = { navController.popBackStack() })
+            BookDetailsPage(book = book, navController = navController, bookViewModel = bookViewModel)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(navController: NavController) {
+fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
     // Read book information from the books.txt file
     val books = readBooksFromAssets(LocalContext.current, "books.txt")
 
