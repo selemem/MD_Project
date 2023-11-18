@@ -3,6 +3,7 @@ package com.example.md_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -14,15 +15,21 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberImagePainter
+import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
 import com.example.md_project.ui.theme.BookViewModel
 
@@ -106,19 +113,25 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
         BookCategoryRow(
             categoryTitle = "To Read",
             books = toReadBooks,
-            onBookClick = { book -> bookViewModel.addToToRead(book) }
+            onBookClick = { book ->
+                navController.navigate("bookDetails/${book.title}")
+            }
         )
 
         BookCategoryRow(
             categoryTitle = "Reading",
             books = readingBooks,
-            onBookClick = { book -> bookViewModel.addToReading(book) }
+            onBookClick = { book ->
+                navController.navigate("bookDetails/${book.title}")
+            }
         )
 
         BookCategoryRow(
             categoryTitle = "Read",
             books = readBooks,
-            onBookClick = { book -> bookViewModel.addToRead(book) }
+            onBookClick = { book ->
+                navController.navigate("bookDetails/${book.title}")
+            }
         )
 
 
@@ -150,11 +163,58 @@ fun BookCategoryRow(
                 .height(200.dp)
         ) {
             items(books) { book ->
-                BookItem(book = book, onBookClick = onBookClick)
+                Card(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .clickable {
+                            // Navigate to book details activity
+                            onBookClick(book)
+                        }
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .width(142.dp)
+                            .height(250.dp)
+                    ) {
+                        // Book cover image
+                        Image(
+                            painter = rememberImagePainter(
+                                data = LocalContext.current.resources.getIdentifier(
+                                    book.cover,
+                                    "drawable",
+                                    LocalContext.current.packageName
+                                ),
+                                builder = {
+                                    crossfade(true)
+                                    transformations(RoundedCornersTransformation(8f))
+                                }
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .width(142.dp)
+                                .height(200.dp)
+                                .clip(shape = RoundedCornerShape(8.dp))
+                        )
+
+                        // Book title with padding
+                        Text(
+                            text = book.title,
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                .padding(top = 8.dp),
+                            style = TextStyle.Default.copy(
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    }
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun BookItem(book: Book, onBookClick: (Book) -> Unit) {
