@@ -33,6 +33,7 @@ import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.findBookByTitle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.md_project.ui.theme.BookViewModel
@@ -78,6 +79,13 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
     val books = readBooksFromAssets(LocalContext.current, "books.txt")
 
     var searchText by remember { mutableStateOf("") }
+
+    // Filtered list based on search text
+    val filteredBooks = if (searchText.isNotBlank()) {
+        books.filter { it.title.contains(searchText, ignoreCase = true) }
+    } else {
+        books
+    }
 
     Column(
         modifier = Modifier
@@ -132,75 +140,289 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
             }
         }
 
-        // Carousel with book covers and titles
-        LazyRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-        ) {
-            items(books) { book ->
-                Card(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .clickable {
-                            // Navigate to book details activity
-                            navController.navigate("bookDetails/${book.title}")
-                        }
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .width(142.dp)
-                            .height(250.dp)
-                    ) {
-                        // Book cover image
-                        Image(
-                            painter = rememberImagePainter(
-                                data = LocalContext.current.resources.getIdentifier(
-                                    book.cover,
-                                    "drawable",
-                                    LocalContext.current.packageName
-                                ),
-                                builder = {
-                                    crossfade(true)
-                                    transformations(RoundedCornersTransformation(8f))
-                                }
-                            ),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(142.dp)
-                                .height(200.dp)
-                                .clip(shape = RoundedCornerShape(8.dp))
-                        )
+        Spacer(modifier = Modifier.height(8.dp))
 
-                        // Book title with padding
-                        Text(
-                            text = book.title,
+
+
+        // Displaying the filtered books
+        if (filteredBooks.isNotEmpty()) {
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(filteredBooks) { book ->
+                    Card(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                // Navigate to book details activity
+                                navController.navigate("bookDetails/${book.title}")
+                            }
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier
-                                .padding(horizontal = 8.dp) // Adjust the padding as needed
-                                .padding(top = 8.dp),
-                            style = TextStyle.Default.copy(
-                                fontWeight = FontWeight.Bold
+                                .padding(8.dp)
+                                .width(142.dp)
+                                .wrapContentHeight()
+                        ) {
+                            // Book cover image
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = LocalContext.current.resources.getIdentifier(
+                                        book.cover,
+                                        "drawable",
+                                        LocalContext.current.packageName
+                                    ),
+                                    builder = {
+                                        crossfade(true)
+                                        transformations(RoundedCornersTransformation(8f))
+                                    }
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(142.dp) // Square dimensions
+                                    .clip(shape = RoundedCornerShape(8.dp))
                             )
-                        )
+
+                            // Book title with padding
+                            Text(
+                                text = book.title,
+                                modifier = Modifier
+                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(top = 8.dp),
+                                style = TextStyle.Default.copy(
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        } else {
+            // Display a message when no books match the search
+            Text(
+                text = "No matching books found",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                style = TextStyle.Default.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray
+                )
+            )
+        }
+
+
+        // Displaying the recommended books
+        Column {
+            Text(
+                text = "Recommended", // Add your desired title here
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 16.dp, top = 8.dp),
+                style = TextStyle.Default.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            )
+
+            // Carousel with book covers and titles
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(books) { book ->
+                    Card(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                // Navigate to book details activity
+                                navController.navigate("bookDetails/${book.title}")
+                            }
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .width(142.dp)
+                                .wrapContentHeight()
+                        ) {
+                            // Book cover image
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = LocalContext.current.resources.getIdentifier(
+                                        book.cover,
+                                        "drawable",
+                                        LocalContext.current.packageName
+                                    ),
+                                    builder = {
+                                        crossfade(true)
+                                        transformations(RoundedCornersTransformation(8f))
+                                    }
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(142.dp) // Square dimensions
+                                    .clip(shape = RoundedCornerShape(8.dp))
+                            )
+
+                            // Book title with padding
+                            Text(
+                                text = book.title,
+                                modifier = Modifier
+                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(top = 8.dp),
+                                style = TextStyle.Default.copy(
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        }
                     }
                 }
             }
         }
 
-        // Other existing code...
+        // Second row
+        Column {
+            Text(
+                text = "Featured Books", // Add your desired title here
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 16.dp, top = 8.dp),
+                style = TextStyle.Default.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            )
+
+            // Carousel with book covers and titles
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(books) { book ->
+                    Card(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                // Navigate to book details activity
+                                navController.navigate("bookDetails/${book.title}")
+                            }
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .width(142.dp)
+                                .wrapContentHeight()
+                        ) {
+                            // Book cover image
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = LocalContext.current.resources.getIdentifier(
+                                        book.cover,
+                                        "drawable",
+                                        LocalContext.current.packageName
+                                    ),
+                                    builder = {
+                                        crossfade(true)
+                                        transformations(RoundedCornersTransformation(8f))
+                                    }
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(142.dp) // Square dimensions
+                                    .clip(shape = RoundedCornerShape(8.dp))
+                            )
+
+                            // Book title with padding
+                            Text(
+                                text = book.title,
+                                modifier = Modifier
+                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(top = 8.dp),
+                                style = TextStyle.Default.copy(
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        // Third row
+        Column {
+            Text(
+                text = "Classics", // Add your desired title here
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 16.dp, top = 8.dp),
+                style = TextStyle.Default.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+            )
+
+            // Carousel with book covers and titles
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(books) { book ->
+                    Card(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable {
+                                // Navigate to book details activity
+                                navController.navigate("bookDetails/${book.title}")
+                            }
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .width(142.dp)
+                                .wrapContentHeight()
+                        ) {
+                            // Book cover image
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = LocalContext.current.resources.getIdentifier(
+                                        book.cover,
+                                        "drawable",
+                                        LocalContext.current.packageName
+                                    ),
+                                    builder = {
+                                        crossfade(true)
+                                        transformations(RoundedCornersTransformation(8f))
+                                    }
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(142.dp) // Square dimensions
+                                    .clip(shape = RoundedCornerShape(8.dp))
+                            )
+
+                            // Book title with padding
+                            Text(
+                                text = book.title,
+                                modifier = Modifier
+                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(top = 8.dp),
+                                style = TextStyle.Default.copy(
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
