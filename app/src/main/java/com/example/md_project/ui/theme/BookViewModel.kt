@@ -1,10 +1,12 @@
 package com.example.md_project.ui.theme
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class BookViewModel : ViewModel() {
-
-    // Existing code...
+    var selectedButton by mutableStateOf("none")
+    var selectedStars by mutableStateOf(0)
 
     // New state variables for each category
     val toReadBooks = mutableStateOf(mutableListOf<Book>())
@@ -14,19 +16,50 @@ class BookViewModel : ViewModel() {
     // Functions to add books to different categories
     fun addToToRead(book: Book) {
         toReadBooks.value.add(book)
-        // Update other necessary logic
+        readingBooks.value.remove(book)
+        readBooks.value.remove(book)
+        selectedButton = "To Read"
+        updateBookStatus(book, BookStatus.TO_READ)
     }
 
     fun addToReading(book: Book) {
+        toReadBooks.value.remove(book)
         readingBooks.value.add(book)
-        // Update other necessary logic
+        readBooks.value.remove(book)
+        selectedButton = "Reading"
+        updateBookStatus(book, BookStatus.READING)
     }
 
     fun addToRead(book: Book) {
+        toReadBooks.value.remove(book)
+        readingBooks.value.remove(book)
         readBooks.value.add(book)
-        // Update other necessary logic
+        selectedButton = "Read"
+        updateBookStatus(book, BookStatus.READ)
+    }
+
+    // Function to update book status
+    fun updateBookStatus(book: Book, newStatus: BookStatus) {
+        // Remove the book from other lists
+        toReadBooks.value.remove(book)
+        readingBooks.value.remove(book)
+        readBooks.value.remove(book)
+
+        // Update the book status
+        when (newStatus) {
+            BookStatus.TO_READ -> toReadBooks.value.add(book)
+            BookStatus.READING -> readingBooks.value.add(book)
+            BookStatus.READ -> readBooks.value.add(book)
+            else -> Unit
+        }
+
+        // Update the book status
+        book.status = newStatus
+
+        // Update selectedButton and selectedStars
+        selectedButton = newStatus.name
+        selectedStars = book.stars
     }
 
     // Other existing code...
 }
-

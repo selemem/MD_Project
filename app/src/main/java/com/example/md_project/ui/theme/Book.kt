@@ -4,6 +4,15 @@ data class Book(
     var title: String,
     var cover: String,
     var author: String,
-    var description: String
+    var description: String,
+    var status: BookStatus = BookStatus.NONE,
+    var stars: Int = 0
 )
+
+enum class BookStatus {
+    NONE,
+    TO_READ,
+    READING,
+    READ
+}
 

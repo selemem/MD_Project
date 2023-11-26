@@ -13,10 +13,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -146,16 +148,14 @@ fun BookCategoryRow(
     books: List<Book>,
     onBookClick: (Book) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 16.dp)
-    ) {
+    Column {
         Text(
             text = categoryTitle,
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            modifier = Modifier.padding(bottom = 8.dp)
+            fontSize = 16.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 16.dp, top = 8.dp),
         )
         LazyRow(
             modifier = Modifier
@@ -174,8 +174,9 @@ fun BookCategoryRow(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
+                            .padding(8.dp)
                             .width(142.dp)
-                            .height(250.dp)
+                            .wrapContentHeight()
                     ) {
                         // Book cover image
                         Image(
@@ -193,7 +194,6 @@ fun BookCategoryRow(
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .width(142.dp)
                                 .height(200.dp)
                                 .clip(shape = RoundedCornerShape(8.dp))
                         )
@@ -208,6 +208,27 @@ fun BookCategoryRow(
                                 fontWeight = FontWeight.Bold
                             )
                         )
+                        // Display stars only for books in the "Read" category
+                        if (categoryTitle == "Read") {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp),
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                repeat(5) { index ->
+                                    val starAlpha = if (index < book.stars) 1f else 0.2f
+
+                                    Icon(
+                                        imageVector = Icons.Default.Star,
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .alpha(starAlpha)
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
