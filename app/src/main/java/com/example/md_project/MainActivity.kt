@@ -51,6 +51,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        bookViewModel.saveChanges()
+    }
 }
 
 @Composable

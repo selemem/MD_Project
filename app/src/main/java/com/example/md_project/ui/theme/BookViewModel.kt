@@ -11,7 +11,9 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 
 
-class BookViewModel : ViewModel() {
+class BookViewModel(application: Application) : AndroidViewModel(application) {
+
+
     var selectedButton by mutableStateOf("none")
     var selectedStars by mutableStateOf(0)
 
@@ -27,6 +29,7 @@ class BookViewModel : ViewModel() {
         readBooks.value.remove(book)
         selectedButton = "To Read"
         updateBookStatus(book, BookStatus.TO_READ)
+        saveBookData()
     }
 
     fun addToReading(book: Book) {
@@ -35,6 +38,7 @@ class BookViewModel : ViewModel() {
         readBooks.value.remove(book)
         selectedButton = "Reading"
         updateBookStatus(book, BookStatus.READING)
+        saveBookData()
     }
 
     fun addToRead(book: Book) {
@@ -43,6 +47,7 @@ class BookViewModel : ViewModel() {
         readBooks.value.add(book)
         selectedButton = "Read"
         updateBookStatus(book, BookStatus.READ)
+        saveBookData()
     }
 
     // Function to update book status
@@ -68,5 +73,70 @@ class BookViewModel : ViewModel() {
         selectedStars = book.stars
     }
 
-    // Other existing code...
+
+    private val sharedPreferencesKey = "BOOK_DATA_KEY"
+
+    // Function to save book data to SharedPreferences
+    private fun saveBookData() {
+        val bookData = mapOf(
+            "toRead" to toReadBooks.value,
+            "reading" to readingBooks.value,
+            "read" to readBooks.value
+        )
+
+        val jsonString = Gson().toJson(bookData)
+
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            sharedPreferencesKey, Context.MODE_PRIVATE
+        )
+        with(sharedPref.edit()) {
+            putString("bookData", jsonString)
+            apply()
+        }
+    }
+
+    // Function to load book data from SharedPreferences
+    private fun loadBookData() {
+        val sharedPref = getApplication<Application>().getSharedPreferences(
+            sharedPreferencesKey, Context.MODE_PRIVATE
+        )
+
+        val jsonString = sharedPref.getString("bookData", null)
+        jsonString?.let {
+            val type = object : TypeToken<Map<String, List<Book>>>() {}.type
+            val bookData: Map<String, List<Book>> = Gson().fromJson(jsonString, type)
+
+            toReadBooks.value = bookData["toRead"]?.map { book ->
+                // Set the correct status and stars for each book
+                book.copy(
+                    status = BookStatus.TO_READ,
+                    stars = book.stars
+                )
+            }?.toMutableList() ?: mutableListOf()
+
+            readingBooks.value = bookData["reading"]?.map { book ->
+                book.copy(
+                    status = BookStatus.READING,
+                    stars = book.stars
+                )
+            }?.toMutableList() ?: mutableListOf()
+
+            readBooks.value = bookData["read"]?.map { book ->
+                book.copy(
+                    status = BookStatus.READ,
+                    stars = book.stars
+                )
+            }?.toMutableList() ?: mutableListOf()
+        }
+    }
+
+    init {
+        // Load book data when the ViewModel is initialized
+        loadBookData()
+    }
+
+    // Call this function whenever you want to save changes to book data
+    fun saveChanges() {
+        saveBookData()
+    }
 }

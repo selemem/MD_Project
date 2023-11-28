@@ -1,5 +1,6 @@
 package com.example.md_project
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
@@ -44,7 +48,11 @@ class ProfileActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                ProfilePage(navController = rememberNavController(), bookViewModel = BookViewModel())
+                // Provide the application instance to the BookViewModel constructor
+                val bookViewModel: BookViewModel = viewModel(
+                    factory = BookViewModelFactory(application = application)
+                )
+                ProfilePage(navController = rememberNavController(), bookViewModel = bookViewModel)
             }
         }
     }
@@ -340,4 +348,10 @@ fun BookItem(book: Book, onBookClick: (Book) -> Unit) {
             .padding(8.dp)
             .clickable { onBookClick(book) }
     )
+}
+
+class BookViewModelFactory(private val application: Application) : ViewModelProvider.AndroidViewModelFactory(application) {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return BookViewModel(application) as T
+    }
 }
