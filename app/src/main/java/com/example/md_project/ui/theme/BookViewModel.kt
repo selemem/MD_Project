@@ -1,8 +1,15 @@
 package com.example.md_project.ui.theme
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import com.google.gson.reflect.TypeToken
+import com.google.gson.Gson
+
 
 class BookViewModel : ViewModel() {
     var selectedButton by mutableStateOf("none")

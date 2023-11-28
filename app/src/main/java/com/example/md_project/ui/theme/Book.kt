@@ -5,7 +5,7 @@ data class Book(
     var cover: String,
     var author: String,
     var description: String,
-    var status: BookStatus = BookStatus.NONE,
+    var status: BookStatus = BookStatus.NONE, // Default status is NON
     var stars: Int = 0
 )
 
@@ -15,4 +15,3 @@ enum class BookStatus {
     READING,
     READ
 }
-

@@ -3,6 +3,7 @@ package com.example.md_project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,7 +23,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,6 +34,7 @@ import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
 import com.example.md_project.ui.theme.BookViewModel
+import com.example.md_project.ui.theme.readBooksFromAssets
 
 class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +58,19 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
     val readingBooks by remember { bookViewModel.readingBooks }
     val readBooks by remember { bookViewModel.readBooks }
 
+    // Read book information from the books.txt file
+    val books = readBooksFromAssets(LocalContext.current, "books.txt")
+
+    var searchText by remember { mutableStateOf("") }
+
+
+    // Filtered list based on search text
+    val filteredBooks = if (searchText.isNotBlank()) {
+        books.filter { it.title.contains(searchText, ignoreCase = true) }
+    } else {
+        books
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -66,15 +80,16 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(36.dp) // Adjust the height
+                .height(50.dp) // Adjust the height
         ) {
             // Search bar
             TextField(
-                value = "",
-                onValueChange = {},
+                value = searchText,
+                onValueChange = { searchText = it },
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp),
+                    .padding(end = 8.dp)
+                    .height(50.dp),
                 shape = RoundedCornerShape(12.dp), // Round the corners
                 colors = TextFieldDefaults.textFieldColors(
                     unfocusedIndicatorColor = Color.Transparent, // Remove the underline
@@ -111,6 +126,84 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+
+        // Conditionally display the LazyRow only when searching
+        if (searchText.isNotBlank()) {
+            // Displaying the filtered books
+            if (filteredBooks.isNotEmpty()) {
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    items(filteredBooks) { book ->
+                        Card(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .clickable {
+                                    // Navigate to book details activity
+                                    navController.navigate("bookDetails/${book.title}")
+                                }
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier
+                                    .padding(8.dp)
+                                    .width(142.dp)
+                                    .wrapContentHeight()
+                            ) {
+                                // Book cover image
+                                Image(
+                                    painter = rememberImagePainter(
+                                        data = LocalContext.current.resources.getIdentifier(
+                                            book.cover,
+                                            "drawable",
+                                            LocalContext.current.packageName
+                                        ),
+                                        builder = {
+                                            crossfade(true)
+                                            transformations(RoundedCornersTransformation(8f))
+                                        }
+                                    ),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(142.dp) // Square dimensions
+                                        .clip(shape = RoundedCornerShape(8.dp))
+                                )
+
+                                // Book title with padding
+                                Text(
+                                    text = book.title,
+                                    modifier = Modifier
+                                        .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                        .padding(top = 8.dp),
+                                    style = TextStyle.Default.copy(
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            } else {
+                // Display a message when no books match the search
+                Text(
+                    text = "No matching books found",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    style = TextStyle.Default.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
+                    )
+                )
+            }
+        }
+
+
+        Spacer(modifier = Modifier.height(16.dp))
+
 
         BookCategoryRow(
             categoryTitle = "To Read",
@@ -247,5 +340,4 @@ fun BookItem(book: Book, onBookClick: (Book) -> Unit) {
             .padding(8.dp)
             .clickable { onBookClick(book) }
     )
-    }
-
+}

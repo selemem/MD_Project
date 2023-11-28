@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    implementation ("com.google.code.gson:gson:2.8.9") // Use the latest version available
+
     implementation ("io.coil-kt:coil-compose:1.4.0")
 
     implementation("androidx.core:core-ktx:1.12.0")

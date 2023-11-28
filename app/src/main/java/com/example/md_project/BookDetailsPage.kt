@@ -56,12 +56,13 @@ import com.example.md_project.ui.theme.Book
 import com.example.md_project.ui.theme.BookStatus
 import com.example.md_project.ui.theme.BookViewModel
 
-
 @SuppressLint("DiscouragedApi")
 @Composable
 fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: BookViewModel) {
     var selectedButton by remember { mutableStateOf(bookViewModel.selectedButton) }
     var selectedStars by remember { mutableStateOf(bookViewModel.selectedStars) }
+
+
 
     //var selectedButton by remember { mutableStateOf("none") }
     //var selectedStars by remember { mutableStateOf(0) }
@@ -79,27 +80,27 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                 .padding(16.dp),
             horizontalArrangement = Arrangement.End
         ) {
-        // Home button in the top-left corner
-        IconButton(
-            onClick = { navController.popBackStack() },
-        ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+            // Home button in the top-left corner
+            IconButton(
+                onClick = { navController.popBackStack() },
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
 
-        // Profile button in the top-right corner
-        IconButton(
-            onClick = { navController.navigate("profileDetails") },
-        ) {
-            Icon(
-                imageVector = Icons.Default.Person,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }}
+            // Profile button in the top-right corner
+            IconButton(
+                onClick = { navController.navigate("profileDetails") },
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }}
 
 
         // Book cover image
@@ -265,4 +266,3 @@ fun createBookButton(
         Text(label)
     }
 }
-
