@@ -37,6 +37,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
+import com.example.md_project.ui.theme.BookStatus
 import com.example.md_project.ui.theme.BookViewModel
 import com.example.md_project.ui.theme.readBooksFromAssets
 
@@ -61,6 +62,16 @@ class ProfileActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
+
+    DisposableEffect(key1 = bookViewModel.selectedStars) {
+        onDispose {
+            // Cleanup, if needed
+        }
+    }
+
+    val selectedStars by rememberUpdatedState(bookViewModel.selectedStars)
+
+
     // List of books for each category
     val toReadBooks by remember { bookViewModel.toReadBooks }
     val readingBooks by remember { bookViewModel.readingBooks }
@@ -133,8 +144,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
+        Spacer(modifier = Modifier.height(8.dp))
 
         // Conditionally display the LazyRow only when searching
         if (searchText.isNotBlank()) {
@@ -210,15 +220,13 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
         }
 
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-
         BookCategoryRow(
             categoryTitle = "To Read",
             books = toReadBooks,
             onBookClick = { book ->
                 navController.navigate("bookDetails/${book.title}")
-            }
+            },
+            bookViewModel = bookViewModel // Pass the BookViewModel instance
         )
 
         BookCategoryRow(
@@ -226,7 +234,8 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
             books = readingBooks,
             onBookClick = { book ->
                 navController.navigate("bookDetails/${book.title}")
-            }
+            },
+            bookViewModel = bookViewModel // Pass the BookViewModel instance
         )
 
         BookCategoryRow(
@@ -234,7 +243,8 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
             books = readBooks,
             onBookClick = { book ->
                 navController.navigate("bookDetails/${book.title}")
-            }
+            },
+            bookViewModel = bookViewModel // Pass the BookViewModel instance
         )
 
 
@@ -243,12 +253,23 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
     }
 }
 
+
 @Composable
 fun BookCategoryRow(
     categoryTitle: String,
     books: List<Book>,
-    onBookClick: (Book) -> Unit
+    onBookClick: (Book) -> Unit,
+    bookViewModel: BookViewModel // Add this parameter
 ) {
+
+    val selectedStars by rememberUpdatedState(bookViewModel.selectedStars)
+
+    DisposableEffect(key1 = bookViewModel.selectedStars) {
+        onDispose {
+            // Cleanup, if needed
+        }
+    }
+
     Column {
         Text(
             text = categoryTitle,
@@ -261,8 +282,8 @@ fun BookCategoryRow(
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
         ) {
+
             items(books) { book ->
                 Card(
                     modifier = Modifier
@@ -295,20 +316,21 @@ fun BookCategoryRow(
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(200.dp)
+                                .height(170.dp)
                                 .clip(shape = RoundedCornerShape(8.dp))
                         )
 
                         // Book title with padding
-                        Text(
-                            text = book.title,
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp) // Adjust the padding as needed
-                                .padding(top = 8.dp),
-                            style = TextStyle.Default.copy(
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
+//                        Text(
+//                            text = book.title,
+//                            modifier = Modifier
+//                                .padding(horizontal = 8.dp) // Adjust the padding as needed
+//                                .padding(top = 8.dp),
+//                            style = TextStyle.Default.copy(
+//                                fontWeight = FontWeight.Bold
+//                            )
+//                        )
+
                         // Display stars only for books in the "Read" category
                         if (categoryTitle == "Read") {
                             Row(
@@ -318,7 +340,7 @@ fun BookCategoryRow(
                                 horizontalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
                                 repeat(5) { index ->
-                                    val starAlpha = if (index < book.stars) 1f else 0.2f
+                                    val starAlpha = if (index < selectedStars) 1f else 0.2f
 
                                     Icon(
                                         imageVector = Icons.Default.Star,

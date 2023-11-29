@@ -13,28 +13,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -47,9 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
@@ -62,11 +54,13 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
     var selectedButton by remember { mutableStateOf(bookViewModel.selectedButton) }
     var selectedStars by remember { mutableStateOf(bookViewModel.selectedStars) }
 
-
-
-    //var selectedButton by remember { mutableStateOf("none") }
-    //var selectedStars by remember { mutableStateOf(0) }
-
+    LaunchedEffect(selectedButton, selectedStars) {
+        // Update the view model when selectedButton or selectedStars change
+        bookViewModel.selectedButton = selectedButton
+        bookViewModel.selectedStars = selectedStars
+        // Update the selected stars in the view model
+        bookViewModel.updateSelectedStars(selectedStars)
+    }
 
     Column(
         modifier = Modifier
@@ -76,8 +70,8 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
 
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+                .fillMaxWidth(),
+               // .padding(16.dp),
             horizontalArrangement = Arrangement.End
         ) {
             // Home button in the top-left corner
@@ -210,7 +204,8 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                             .alpha(starAlpha)
                             .clickable {
                                 selectedStars = index + 1
-                                // Handle star click
+                                // Update the selected stars in the view model
+                                bookViewModel.updateSelectedStars(selectedStars)
                             }
                     )
                 }
@@ -230,7 +225,11 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                 bookViewModel.selectedStars = selectedStars
             }}
 
+
+
     }
+
+
 }
 
 private fun updateBookStatus(book: Book, newStatus: BookStatus, bookViewModel: BookViewModel) {

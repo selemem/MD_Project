@@ -1,4 +1,5 @@
 package com.example.md_project
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -35,13 +36,20 @@ import com.example.md_project.ui.theme.findBookByTitle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import coil.compose.rememberImagePainter
 import com.example.md_project.ui.theme.BookViewModel
 
 class MainActivity : ComponentActivity() {
-    private val bookViewModel by viewModels<BookViewModel>()
+    private lateinit var bookViewModel: BookViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize the BookViewModel with the application instance
+        bookViewModel = ViewModelProvider(this, ViewModelFactory(application)).get(BookViewModel::class.java)
+
         setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -58,7 +66,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+class ViewModelFactory(private val application: Application) : ViewModelProvider.AndroidViewModelFactory(application) {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return BookViewModel(application) as T
+    }
+}
+
+
+
 @Composable
+
+
 fun Navigation(bookViewModel: BookViewModel) {
     val navController = rememberNavController()
 

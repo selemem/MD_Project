@@ -3,6 +3,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
@@ -21,6 +22,10 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     val toReadBooks = mutableStateOf(mutableListOf<Book>())
     val readingBooks = mutableStateOf(mutableListOf<Book>())
     val readBooks = mutableStateOf(mutableListOf<Book>())
+
+    fun updateSelectedStars(stars: Int) {
+        selectedStars = stars
+    }
 
     // Functions to add books to different categories
     fun addToToRead(book: Book) {
