@@ -1,5 +1,6 @@
 package com.example.md_project
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,6 +48,7 @@ import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
 import com.example.md_project.ui.theme.BookStatus
 import com.example.md_project.ui.theme.BookViewModel
+
 
 @SuppressLint("DiscouragedApi")
 @Composable
@@ -205,7 +207,8 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                             .clickable {
                                 selectedStars = index + 1
                                 // Update the selected stars in the view model
-                                bookViewModel.updateSelectedStars(selectedStars)
+                                bookViewModel.updateBookStatus(book, BookStatus.READ)
+
                             }
                     )
                 }
@@ -265,3 +268,4 @@ fun createBookButton(
         Text(label)
     }
 }
+

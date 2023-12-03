@@ -9,9 +9,3 @@ data class Book(
     var stars: Int = 0
 )
 
-enum class BookStatus {
-    NONE,
-    TO_READ,
-    READING,
-    READ
-}

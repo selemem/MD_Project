@@ -42,6 +42,8 @@ import com.example.md_project.ui.theme.BookViewModel
 import com.example.md_project.ui.theme.readBooksFromAssets
 
 class ProfileActivity : ComponentActivity() {
+    private lateinit var bookViewModel: BookViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,6 +58,11 @@ class ProfileActivity : ComponentActivity() {
                 ProfilePage(navController = rememberNavController(), bookViewModel = bookViewModel)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        bookViewModel.saveChanges()
     }
 }
 
@@ -266,7 +273,6 @@ fun BookCategoryRow(
 
     DisposableEffect(key1 = bookViewModel.selectedStars) {
         onDispose {
-            // Cleanup, if needed
         }
     }
 
