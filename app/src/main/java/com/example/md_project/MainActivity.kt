@@ -268,7 +268,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                items(books) { book ->
+                items(books.subList(0, 9)) { book ->
                     Card(
                         modifier = Modifier
                             .padding(8.dp)
@@ -338,7 +338,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                items(books) { book ->
+                items(books.subList(10, 19)) { book ->
                     Card(
                         modifier = Modifier
                             .padding(8.dp)
@@ -408,7 +408,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                items(books) { book ->
+                items(books.subList(20, 29)) { book ->
                     Card(
                         modifier = Modifier
                             .padding(8.dp)
