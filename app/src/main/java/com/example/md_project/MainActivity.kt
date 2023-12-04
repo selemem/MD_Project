@@ -2,6 +2,7 @@ package com.example.md_project
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -248,10 +249,11 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
             }
         }
 
-        // Displaying the recommended books
+
+//first row
         Column {
             Text(
-                text = "Recommended", // Add your desired title here
+                text = "Classics", // Add your desired title here
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 16.dp, top = 8.dp),
@@ -391,7 +393,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
         // Third row
         Column {
             Text(
-                text = "Classics", // Add your desired title here
+                text = "2023 Best Selling", // Add your desired title here
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 16.dp, top = 8.dp),
