@@ -25,32 +25,36 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Functions to add books to different categories
-//    fun addToToRead(book: Book) {
-//        toReadBooks.value.add(book)
-//        readingBooks.value.remove(book)
-//        readBooks.value.remove(book)
-//        selectedButton = "To Read"
-//        updateBookStatus(book, BookStatus.TO_READ)
-//        saveBookData()
-//    }
-//
-//    fun addToReading(book: Book) {
-//        toReadBooks.value.remove(book)
-//        readingBooks.value.add(book)
-//        readBooks.value.remove(book)
-//        selectedButton = "Reading"
-//        updateBookStatus(book, BookStatus.READING)
-//        saveBookData()
-//    }
-//
-//    fun addToRead(book: Book) {
-//        toReadBooks.value.remove(book)
-//        readingBooks.value.remove(book)
-//        readBooks.value.add(book)
-//        selectedButton = "Read"
-//        updateBookStatus(book, BookStatus.READ)
-//        saveBookData()
-//    }
+    fun addToToRead(book: Book) {
+        val newBook = book.copy() // Assuming your Book class has a copy function
+        toReadBooks.value.add(newBook)
+        readingBooks.value.remove(newBook)
+        readBooks.value.remove(newBook)
+        selectedButton = "To Read"
+        updateBookStatus(newBook, BookStatus.TO_READ)
+        saveBookData()
+    }
+
+    fun addToReading(book: Book) {
+        val newBook = book.copy()
+        toReadBooks.value.remove(newBook)
+        readingBooks.value.add(newBook)
+        readBooks.value.remove(newBook)
+        selectedButton = "Reading"
+        updateBookStatus(newBook, BookStatus.READING)
+        saveBookData()
+    }
+
+    fun addToRead(book: Book) {
+        val newBook = book.copy()
+        toReadBooks.value.remove(newBook)
+        readingBooks.value.remove(newBook)
+        readBooks.value.add(newBook)
+        selectedButton = "Read"
+        updateBookStatus(newBook, BookStatus.READ)
+        saveBookData()
+    }
+
 
     // Function to update book status
     fun updateBookStatus(book: Book, newStatus: BookStatus) {

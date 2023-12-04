@@ -10,8 +10,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
@@ -44,6 +46,7 @@ import com.example.md_project.ui.theme.BookViewModel
 class MainActivity : ComponentActivity() {
     private lateinit var bookViewModel: BookViewModel
 
+    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,7 +60,10 @@ class MainActivity : ComponentActivity() {
             ) {
                 Navigation(bookViewModel = bookViewModel)
             }
+
         }
+
+
     }
 
     override fun onStop() {
@@ -103,7 +109,6 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
 
     var searchText by remember { mutableStateOf("") }
 
-
     // Filtered list based on search text
     val filteredBooks = if (searchText.isNotBlank()) {
         books.filter { it.title.contains(searchText, ignoreCase = true) }
@@ -115,6 +120,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         // Search bar and profile button in a Row
         Row(

@@ -26,7 +26,8 @@ fun readBooksFromAssets(context: Context, fileName: String): List<Book> {
                 title = jsonBook.getString("Title"),
                 cover = jsonBook.getString("Cover"),
                 author = jsonBook.getString("Author"),
-                description = jsonBook.getString("Description")
+                description = jsonBook.getString("Description"),
+
             )
             books.add(book)
         }
