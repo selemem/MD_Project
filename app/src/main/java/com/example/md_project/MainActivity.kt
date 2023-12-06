@@ -1,11 +1,8 @@
 package com.example.md_project
 import android.app.Application
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -47,7 +44,7 @@ import com.example.md_project.ui.theme.BookViewModel
 class MainActivity : ComponentActivity() {
     private lateinit var bookViewModel: BookViewModel
 
-    @OptIn(ExperimentalLayoutApi::class)
+    // Initializes the Main Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,10 +58,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Navigation(bookViewModel = bookViewModel)
             }
-
         }
-
-
     }
 
     override fun onStop() {
@@ -79,11 +73,8 @@ class ViewModelFactory(private val application: Application) : ViewModelProvider
     }
 }
 
-
-
 @Composable
-
-
+// Sets up the navigation components
 fun Navigation(bookViewModel: BookViewModel) {
     val navController = rememberNavController()
 
@@ -116,7 +107,6 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
     } else {
         books
     }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -129,7 +119,6 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                 .fillMaxWidth()
                 .height(50.dp) // Adjust the height
         ) {
-
             // Search bar
             TextField(
                 value = searchText,
@@ -176,7 +165,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
         Spacer(modifier = Modifier.height(8.dp))
 
 
-// Conditionally display the LazyRow only when searching
+        // Display the LazyRow only when searching
         if (searchText.isNotBlank()) {
             // Displaying the filtered books
             if (filteredBooks.isNotEmpty()) {
@@ -224,7 +213,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                                 Text(
                                     text = book.title,
                                     modifier = Modifier
-                                        .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                        .padding(horizontal = 8.dp)
                                         .padding(top = 8.dp),
                                     style = TextStyle.Default.copy(
                                         fontWeight = FontWeight.Bold
@@ -235,7 +224,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                     }
                 }
             } else {
-                // Display a message when no books match the search
+                // Display a message when no books matches the search
                 Text(
                     text = "No matching books found",
                     modifier = Modifier
@@ -250,10 +239,10 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
         }
 
 
-//first row
+        // First row of books (Classics)
         Column {
             Text(
-                text = "Classics", // Add your desired title here
+                text = "Classics",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 16.dp, top = 8.dp),
@@ -308,7 +297,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                             Text(
                                 text = book.title,
                                 modifier = Modifier
-                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(horizontal = 8.dp)
                                     .padding(top = 8.dp),
                                 style = TextStyle.Default.copy(
                                     fontWeight = FontWeight.Bold
@@ -320,10 +309,10 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
             }
         }
 
-        // Second row
+        // Second row of books (Featured Books)
         Column {
             Text(
-                text = "Featured Books", // Add your desired title here
+                text = "Featured Books",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 16.dp, top = 8.dp),
@@ -370,7 +359,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                                 contentDescription = null,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(142.dp) // Square dimensions
+                                    .height(142.dp)
                                     .clip(shape = RoundedCornerShape(8.dp))
                             )
 
@@ -378,7 +367,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                             Text(
                                 text = book.title,
                                 modifier = Modifier
-                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(horizontal = 8.dp)
                                     .padding(top = 8.dp),
                                 style = TextStyle.Default.copy(
                                     fontWeight = FontWeight.Bold
@@ -390,10 +379,10 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
             }
         }
 
-        // Third row
+        // Third row of books (2023 Best Selling)
         Column {
             Text(
-                text = "2023 Best Selling", // Add your desired title here
+                text = "2023 Best Selling",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 8.dp, end = 16.dp, top = 8.dp),
@@ -440,7 +429,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                                 contentDescription = null,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(142.dp) // Square dimensions
+                                    .height(142.dp)
                                     .clip(shape = RoundedCornerShape(8.dp))
                             )
 
@@ -448,7 +437,7 @@ fun HomePage(navController: NavController, bookViewModel: BookViewModel) {
                             Text(
                                 text = book.title,
                                 modifier = Modifier
-                                    .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                    .padding(horizontal = 8.dp)
                                     .padding(top = 8.dp),
                                 style = TextStyle.Default.copy(
                                     fontWeight = FontWeight.Bold

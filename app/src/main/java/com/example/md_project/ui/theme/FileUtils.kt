@@ -9,8 +9,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-
-// Update your readBooksFromAssets function
 fun readBooksFromAssets(context: Context, fileName: String): List<Book> {
     val books = mutableListOf<Book>()
     try {
@@ -27,7 +25,8 @@ fun readBooksFromAssets(context: Context, fileName: String): List<Book> {
                 cover = jsonBook.getString("Cover"),
                 author = jsonBook.getString("Author"),
                 description = jsonBook.getString("Description"),
-
+                status = BookStatus.NONE, // Default status is NONE
+                stars = 0 // Default stars is 0
             )
             books.add(book)
         }
@@ -41,7 +40,6 @@ fun readBooksFromAssets(context: Context, fileName: String): List<Book> {
     }
     return books
 }
-
 
 
 @Composable

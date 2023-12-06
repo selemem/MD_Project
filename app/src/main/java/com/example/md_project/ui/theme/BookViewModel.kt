@@ -9,13 +9,12 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 
-
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     var selectedButton by mutableStateOf("none")
     var selectedStars by mutableStateOf(0)
 
-    // New state variables for each category
+    // Variables for each category
     val toReadBooks = mutableStateOf(mutableListOf<Book>())
     val readingBooks = mutableStateOf(mutableListOf<Book>())
     val readBooks = mutableStateOf(mutableListOf<Book>())
@@ -26,7 +25,8 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     // Functions to add books to different categories
     fun addToToRead(book: Book) {
-        val newBook = book.copy() // Assuming your Book class has a copy function
+        val newBook = book.copy()
+        newBook.status = BookStatus.TO_READ
         toReadBooks.value.add(newBook)
         readingBooks.value.remove(newBook)
         readBooks.value.remove(newBook)
@@ -37,6 +37,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     fun addToReading(book: Book) {
         val newBook = book.copy()
+        newBook.status = BookStatus.READING
         toReadBooks.value.remove(newBook)
         readingBooks.value.add(newBook)
         readBooks.value.remove(newBook)
@@ -47,6 +48,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     fun addToRead(book: Book) {
         val newBook = book.copy()
+        newBook.status = BookStatus.READ
         toReadBooks.value.remove(newBook)
         readingBooks.value.remove(newBook)
         readBooks.value.add(newBook)
@@ -71,18 +73,16 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             else -> Unit
         }
 
-        // Update the book status
         book.status = newStatus
+        book.stars = selectedStars
 
         // Update selectedButton and selectedStars
         selectedButton = newStatus.name
         selectedStars = book.stars
     }
 
-
     private val sharedPreferencesKey = "BOOK_DATA_KEY"
 
-    // Function to save book data to SharedPreferences
     // Function to save book data to SharedPreferences
     private fun saveBookData() {
         val bookData = mapOf(
@@ -104,6 +104,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             Log.d("SaveBookData", "Saved book data successfully.")
         }
     }
+
 
     // Function to load book data from SharedPreferences
     private fun loadBookData() {
@@ -142,7 +143,6 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             description = bookMap["description"] as String,
             stars = (bookMap["stars"] as Double?)?.toInt() ?: 0,
             status = BookStatus.valueOf(bookMap["status"] as String)
-            // Add any other properties of your Book class here
         )
     }
 
@@ -151,10 +151,9 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         loadBookData()
     }
 
-    // Call this function whenever you want to save changes to book data
+    // Call this function whensaving changes to book data
     fun saveChanges() {
         saveBookData()
     }
-
 
 }

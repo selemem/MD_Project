@@ -53,7 +53,6 @@ class ProfileActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                // Provide the application instance to the BookViewModel constructor
                 val bookViewModel: BookViewModel = viewModel(
                     factory = BookViewModelFactory(application = application)
                 )
@@ -74,12 +73,10 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
 
     DisposableEffect(key1 = bookViewModel.selectedStars) {
         onDispose {
-            // Cleanup, if needed
         }
     }
 
     val selectedStars by rememberUpdatedState(bookViewModel.selectedStars)
-
 
     // List of books for each category
     val toReadBooks by remember { bookViewModel.toReadBooks }
@@ -90,7 +87,6 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
     val books = readBooksFromAssets(LocalContext.current, "books.txt")
 
     var searchText by remember { mutableStateOf("") }
-
 
     // Filtered list based on search text
     val filteredBooks = if (searchText.isNotBlank()) {
@@ -105,11 +101,11 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        // Search bar and back button in a Row
+        // Search bar and button in a Row
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp) // Adjust the height
+                .height(50.dp)
         ) {
             // Search bar
             TextField(
@@ -128,7 +124,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                     color = LocalContentColor.current
                 ),
                 placeholder = {
-                    Text("Search", color = Color.Gray) // Use placeholder instead of label
+                    Text("Search", color = Color.Gray)
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Text
@@ -141,7 +137,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                 }
             )
 
-            // Button with back icon to the main activity
+            // Icon Button
             IconButton(
                 onClick = {
                     navController.navigate("home")
@@ -156,7 +152,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Conditionally display the LazyRow only when searching
+        // Displaying the LazyRow only when searching
         if (searchText.isNotBlank()) {
             // Displaying the filtered books
             if (filteredBooks.isNotEmpty()) {
@@ -196,7 +192,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(142.dp) // Square dimensions
+                                        .height(142.dp)
                                         .clip(shape = RoundedCornerShape(8.dp))
                                 )
 
@@ -204,7 +200,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                                 Text(
                                     text = book.title,
                                     modifier = Modifier
-                                        .padding(horizontal = 8.dp) // Adjust the padding as needed
+                                        .padding(horizontal = 8.dp)
                                         .padding(top = 8.dp),
                                     style = TextStyle.Default.copy(
                                         fontWeight = FontWeight.Bold
@@ -215,7 +211,7 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                     }
                 }
             } else {
-                // Display a message when no books match the search
+                // Display a message when no books matches the search
                 Text(
                     text = "No matching books found",
                     modifier = Modifier
@@ -228,7 +224,6 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
                 )
             }
         }
-
 
         BookCategoryRow(
             categoryTitle = "To Read",
@@ -256,10 +251,6 @@ fun ProfilePage(navController: NavController, bookViewModel: BookViewModel) {
             },
             bookViewModel = bookViewModel // Pass the BookViewModel instance
         )
-
-
-
-        // Your existing code...
     }
 }
 
@@ -269,7 +260,7 @@ fun BookCategoryRow(
     categoryTitle: String,
     books: List<Book>,
     onBookClick: (Book) -> Unit,
-    bookViewModel: BookViewModel // Add this parameter
+    bookViewModel: BookViewModel
 ) {
 
     val selectedStars by rememberUpdatedState(bookViewModel.selectedStars)
@@ -288,76 +279,70 @@ fun BookCategoryRow(
                 .fillMaxWidth()
                 .padding(start = 8.dp, end = 16.dp, top = 8.dp),
         )
-        LazyRow(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
 
-            items(books) { book ->
-                Card(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .clickable {
-                            // Navigate to book details activity
-                            onBookClick(book)
-                        }
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
+        if (books.isEmpty()) {
+            // Display a placeholder card when no books are placed in the category
+            PlaceholderCard()
+        } else {
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(books) { book ->
+                    Card(
                         modifier = Modifier
                             .padding(8.dp)
-                            .width(142.dp)
-                            .wrapContentHeight()
+                            .clickable {
+                                // Navigate to book details activity
+                                onBookClick(book)
+                            }
                     ) {
-                        // Book cover image
-                        Image(
-                            painter = rememberImagePainter(
-                                data = LocalContext.current.resources.getIdentifier(
-                                    book.cover,
-                                    "drawable",
-                                    LocalContext.current.packageName
-                                ),
-                                builder = {
-                                    crossfade(true)
-                                    transformations(RoundedCornersTransformation(8f))
-                                }
-                            ),
-                            contentDescription = null,
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(170.dp)
-                                .clip(shape = RoundedCornerShape(8.dp))
-                        )
-
-                        // Book title with padding
-//                        Text(
-//                            text = book.title,
-//                            modifier = Modifier
-//                                .padding(horizontal = 8.dp) // Adjust the padding as needed
-//                                .padding(top = 8.dp),
-//                            style = TextStyle.Default.copy(
-//                                fontWeight = FontWeight.Bold
-//                            )
-//                        )
-
-                        // Display stars only for books in the "Read" category
-                        if (categoryTitle == "Read") {
-                            Row(
+                                .padding(8.dp)
+                                .width(142.dp)
+                                .wrapContentHeight()
+                        ) {
+                            // Book cover image
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = LocalContext.current.resources.getIdentifier(
+                                        book.cover,
+                                        "drawable",
+                                        LocalContext.current.packageName
+                                    ),
+                                    builder = {
+                                        crossfade(true)
+                                        transformations(RoundedCornersTransformation(8f))
+                                    }
+                                ),
+                                contentDescription = null,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(top = 8.dp),
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                repeat(5) { index ->
-                                    val starAlpha = if (index < selectedStars) 1f else 0.2f
+                                    .height(170.dp)
+                                    .clip(shape = RoundedCornerShape(8.dp))
+                            )
 
-                                    Icon(
-                                        imageVector = Icons.Default.Star,
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .size(24.dp)
-                                            .alpha(starAlpha)
-                                    )
+                            // Display stars only for books in the "Read" category
+                            if (categoryTitle == "Read") {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 8.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    repeat(5) { index ->
+                                        val starAlpha = if (index < selectedStars) 1f else 0.2f
+
+                                        Icon(
+                                            imageVector = Icons.Default.Star,
+                                            contentDescription = null,
+                                            modifier = Modifier
+                                                .size(24.dp)
+                                                .alpha(starAlpha)
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -368,16 +353,34 @@ fun BookCategoryRow(
     }
 }
 
+//@Composable
+//fun BookItem(book: Book, onBookClick: (Book) -> Unit) {
+//    // For simplicity, just displaying the book title for now
+//    Text(
+//        text = book.title,
+//        modifier = Modifier
+//            .padding(8.dp)
+//            .clickable { onBookClick(book) }
+//    )
+//}
 
 @Composable
-fun BookItem(book: Book, onBookClick: (Book) -> Unit) {
-    // You can customize the appearance of each book item here
-    // For simplicity, just displaying the book title for now
-    Text(
-        text = book.title,
+fun PlaceholderCard() {
+    // Display a placeholder card when no books are present in the category
+    Card(
         modifier = Modifier
             .padding(8.dp)
-            .clickable { onBookClick(book) }
+            .fillMaxWidth()
+            .height(200.dp),
+        content = {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text("No books added yet", color = Color.Gray)
+            }
+        }
     )
 }
 

@@ -1,6 +1,5 @@
 package com.example.md_project
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -77,10 +76,9 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-               // .padding(16.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            // Home button in the top-left corner
+            // Home button
             IconButton(
                 onClick = { navController.popBackStack() },
             ) {
@@ -91,7 +89,7 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                 )
             }
 
-            // Profile button in the top-right corner
+            // Profile button
             IconButton(
                 onClick = { navController.navigate("profileDetails") },
             ) {
@@ -134,7 +132,7 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
             )
         )
 
-        // Author's name in 16sp and italic
+        // Author's name
         Text(
             text = book.author,
             style = TextStyle.Default.copy(
@@ -231,18 +229,14 @@ fun BookDetailsPage(book: Book, navController: NavController, bookViewModel: Boo
                 bookViewModel.selectedButton = selectedButton
                 bookViewModel.selectedStars = selectedStars
             }}
-
-
-
     }
 
-
 }
 
-private fun updateBookStatus(book: Book, newStatus: BookStatus, bookViewModel: BookViewModel) {
-    // Save the selected status to the book
-    book.status = newStatus
-}
+//private fun updateBookStatus(book: Book, newStatus: BookStatus, bookViewModel: BookViewModel) {
+//    // Save the selected status to the book
+//    book.status = newStatus
+//}
 
 @Composable
 fun createBookButton(

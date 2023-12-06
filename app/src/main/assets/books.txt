@@ -4,209 +4,269 @@
     "Cover": "cover1",
     "Title": "The Catcher in the Rye",
     "Author": "J.D. Salinger",
-    "Description": "Fleeing the crooks at Pencey Prep, he pinballs around New York City seeking solace in fleeting encounters—shooting the bull with strangers in dive hotels, wandering alone round Central Park, getting beaten up by pimps and cut down by erstwhile girlfriends. The city is beautiful and terrible, in all its neon loneliness and seedy glamour, its mingled sense of possibility and emptiness. Holden passes through it like a ghost, thinking always of his kid sister Phoebe, the only person who really understands him, and his determination to escape the phonies and find a life of true meaning."
+    "Description": "Fleeing the crooks at Pencey Prep, he pinballs around New York City seeking solace in fleeting encounters—shooting the bull with strangers in dive hotels, wandering alone round Central Park, getting beaten up by pimps and cut down by erstwhile girlfriends. The city is beautiful and terrible, in all its neon loneliness and seedy glamour, its mingled sense of possibility and emptiness. Holden passes through it like a ghost, thinking always of his kid sister Phoebe, the only person who really understands him, and his determination to escape the phonies and find a life of true meaning.",
+    "Status": "NONE",
+    "Stars": 0
   },
   {
     "Book": "2",
     "Cover": "cover2",
     "Title": "To Kill a Mockingbird",
     "Author": "Harper Lee",
-    "Description": "When Tom Robinson, a Black man, is falsely accused of raping Mayella Ewell, a white woman, Atticus agrees to defend him despite threats from the community. Although Atticus's defense is strong, Tom is convicted, and he is later killed while trying to escape custody."
+    "Description": "When Tom Robinson, a Black man, is falsely accused of raping Mayella Ewell, a white woman, Atticus agrees to defend him despite threats from the community. Although Atticus's defense is strong, Tom is convicted, and he is later killed while trying to escape custody.",
+    "Status": "NONE",
+    "Stars": 0
   },
   {
     "Book": "3",
     "Cover": "cover3",
     "Title": "Les Misérables",
     "Author": "Victor Hugo",
-    "Description": "Victor Hugo's Les Misérables is a story about inequality in France. Jean Valjean, a well-meaning thief turned factory owner, tries to help the dying Fantine, a young single mother, but is arrested. He finds Cosette, Fantine's daughter out of wedlock, and rescues her from dismal circumstances."
+    "Description": "Victor Hugo's Les Misérables is a story about inequality in France. Jean Valjean, a well-meaning thief turned factory owner, tries to help the dying Fantine, a young single mother, but is arrested. He finds Cosette, Fantine's daughter out of wedlock, and rescues her from dismal circumstances.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "4",
     "Cover": "cover4",
     "Title": "1984",
     "Author": "George Orwell",
-    "Description": "It tells the story of Winston Smith, a citizen of the miserable society of Oceania, who is trying to rebel against the Party and its omnipresent symbol, Big Brother. Winston works for the Ministry of Truth altering the history of Oceania to fit the government's current narrative."
+    "Description": "It tells the story of Winston Smith, a citizen of the miserable society of Oceania, who is trying to rebel against the Party and its omnipresent symbol, Big Brother. Winston works for the Ministry of Truth altering the history of Oceania to fit the government's current narrative.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "5",
     "Cover": "cover5",
     "Title": "The Picture of Dorian Gray",
     "Author": "Oscar Wild",
-    "Description": "It tells the story of Dorian Gray, a wealthy young Englishman who prizes his looks and his youth above all else. The basic plot of the novel is as follows: Dorian has his portrait painted as a young man. The portrait takes on Dorian's sins and his signs of aging."
+    "Description": "It tells the story of Dorian Gray, a wealthy young Englishman who prizes his looks and his youth above all else. The basic plot of the novel is as follows: Dorian has his portrait painted as a young man. The portrait takes on Dorian's sins and his signs of aging.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "6",
     "Cover": "cover6",
     "Title": "Fahrenheit 451",
     "Author": "Ray Bradbury",
-    "Description": "Set in a future society where books are banned and “firemen” burn any that are discovered. Follows the protagonist, Guy Montag, a fireman who begins to question his duty to the state and ultimately has to choose between his personal beliefs and his loyalty to the government."
+    "Description": "Set in a future society where books are banned and “firemen” burn any that are discovered. Follows the protagonist, Guy Montag, a fireman who begins to question his duty to the state and ultimately has to choose between his personal beliefs and his loyalty to the government.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "7",
     "Cover": "cover7",
     "Title": "Ulysses",
     "Author": "James Joyce",
-    "Description": "In Ulysses, Leopold Bloom and Stephen Dedalus both journey through one single day's events; eventually, the two wind up at Bloom's residence. The journey that Bloom and Dedalus takes mirrors those of Odysseus in Homer's The Odyssey."
+    "Description": "In Ulysses, Leopold Bloom and Stephen Dedalus both journey through one single day's events; eventually, the two wind up at Bloom's residence. The journey that Bloom and Dedalus takes mirrors those of Odysseus in Homer's The Odyssey.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "8",
     "Cover": "cover8",
     "Title": "Crime and Punishment",
     "Author": "Fyodor Dostoevsky",
-    "Description": "Crime and Punishment follows the mental anguish and moral dilemmas of Rodion Raskolnikov, an impoverished ex-student in Saint Petersburg who plans to kill an unscrupulous pawnbroker, an old woman who stores money and valuable objects in her flat."
+    "Description": "Crime and Punishment follows the mental anguish and moral dilemmas of Rodion Raskolnikov, an impoverished ex-student in Saint Petersburg who plans to kill an unscrupulous pawnbroker, an old woman who stores money and valuable objects in her flat.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "9",
     "Cover": "cover9",
     "Title": "The Odissey",
     "Author": "Homer",
-    "Description": "The Odyssey is Homer's epic of Odysseus' 10-year struggle to return home after the Trojan War. While Odysseus battles mystical creatures and faces the wrath of the gods, his wife Penelope and his son Telemachus stave off suitors vying for Penelope's hand and Ithaca's throne long enough for Odysseus to return."
+    "Description": "The Odyssey is Homer's epic of Odysseus' 10-year struggle to return home after the Trojan War. While Odysseus battles mystical creatures and faces the wrath of the gods, his wife Penelope and his son Telemachus stave off suitors vying for Penelope's hand and Ithaca's throne long enough for Odysseus to return.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "10",
     "Cover": "cover10",
     "Title": "The Divine Comedy",
     "Author": "Dante Alighieri",
-    "Description": "a man, generally assumed to be Dante himself, is miraculously enabled to undertake an ultramundane journey, which leads him to visit the souls in Hell, Purgatory, and Paradise."
+    "Description": "a man, generally assumed to be Dante himself, is miraculously enabled to undertake an ultramundane journey, which leads him to visit the souls in Hell, Purgatory, and Paradise.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "11",
     "Cover": "cover11",
     "Title": "The Fellowship of the Ring",
     "Author": "J. R. R. Tolkien",
-    "Description": "The Fellowship of the Ring consists of nine walkers who set out on the quest to destroy the One Ring, in opposition to the nine Black Riders: Frodo Baggins, Sam Gamgee, Merry Brandybuck and Pippin Took; Gandalf; the Men Aragorn and Boromir, son of the Steward of Gondor; the Elf Legolas; and the Dwarf Gimli."
+    "Description": "The Fellowship of the Ring consists of nine walkers who set out on the quest to destroy the One Ring, in opposition to the nine Black Riders: Frodo Baggins, Sam Gamgee, Merry Brandybuck and Pippin Took; Gandalf; the Men Aragorn and Boromir, son of the Steward of Gondor; the Elf Legolas; and the Dwarf Gimli.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "12",
     "Cover": "cover12",
     "Title": "The Two Towers",
     "Author": "J. R. R. Tolkien",
-    "Description": "J.R.R. Tolkien's epic fantasy novel The Two Towers (1954) is the second book in the fantasy saga, The Lord of the Rings. Two hobbits must journey into Mordor and destroy an ancient and evil ring before it destroys Middle Earth. The Lord of the Rings is now a major motion picture trilogy."
+    "Description": "J.R.R. Tolkien's epic fantasy novel The Two Towers (1954) is the second book in the fantasy saga, The Lord of the Rings. Two hobbits must journey into Mordor and destroy an ancient and evil ring before it destroys Middle Earth. The Lord of the Rings is now a major motion picture trilogy.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "13",
     "Cover": "cover13",
     "Title": "The Return of the King",
     "Author": "J. R. R. Tolkien",
-    "Description": "Following on from the action of The Fellowship of the Ring (1954) and The Two Towers (1954), The Return of the King covers the culmination of Frodo Baggins's quest to destroy the One Ring coveted by the Dark Lord Sauron, and Aragorn's defense of the kingdom of Gondor against Sauron's army."
+    "Description": "Following on from the action of The Fellowship of the Ring (1954) and The Two Towers (1954), The Return of the King covers the culmination of Frodo Baggins's quest to destroy the One Ring coveted by the Dark Lord Sauron, and Aragorn's defense of the kingdom of Gondor against Sauron's army.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "14",
     "Cover": "cover14",
     "Title": "The Hobbit",
     "Author": "J. R. R. Tolkien",
-    "Description": "The Hobbit is set in Middle-earth and follows home-loving Bilbo Baggins, the hobbit of the title, who joins the wizard Gandalf and the thirteen dwarves of Thorin's Company, on a quest to reclaim the dwarves' home and treasure from the dragon Smaug."
+    "Description": "The Hobbit is set in Middle-earth and follows home-loving Bilbo Baggins, the hobbit of the title, who joins the wizard Gandalf and the thirteen dwarves of Thorin's Company, on a quest to reclaim the dwarves' home and treasure from the dragon Smaug.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "15",
     "Cover": "cover15",
     "Title": "The Little Prince",
     "Author": "Antoine de Saint-Exupéry",
-    "Description": "The Little Prince tells the story of a pilot whose plane crashes in the desert. There he meets and befriends a young boy from another planet, and as he works to fix his plane, he listens to the boy's tales of his interstellar travels."
+    "Description": "The Little Prince tells the story of a pilot whose plane crashes in the desert. There he meets and befriends a young boy from another planet, and as he works to fix his plane, he listens to the boy's tales of his interstellar travels.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "16",
     "Cover": "cover16",
     "Title": "Lolita",
     "Author": "Vladimir Nabokov",
-    "Description": "Lolita is a controversial novel by Vladimir Nabokov. It tells the story of Humbert Humbert, a middle-aged man obsessed with a young girl named Lolita. The book delves into the dark depths of obsession and explores the blurred boundaries between love and exploitation."
+    "Description": "Lolita is a controversial novel by Vladimir Nabokov. It tells the story of Humbert Humbert, a middle-aged man obsessed with a young girl named Lolita. The book delves into the dark depths of obsession and explores the blurred boundaries between love and exploitation.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "17",
     "Cover": "cover17",
     "Title": "The Alchemist",
     "Author": "Paulo Coelho",
-    "Description": "The Alchemist is a story of following one's dreams to find one's purpose in life. The main character, Santiago, is a Spanish shepherd boy who leaves behind his job and family to search for his Personal Legend, a hidden treasure that he believes is buried near the pyramids in Egypt."
+    "Description": "The Alchemist is a story of following one's dreams to find one's purpose in life. The main character, Santiago, is a Spanish shepherd boy who leaves behind his job and family to search for his Personal Legend, a hidden treasure that he believes is buried near the pyramids in Egypt.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "18",
     "Cover": "cover18",
     "Title": "The Fault in Our Stars",
     "Author": "John Green",
-    "Description": "Hazel Grace Lancaster, a 16-year-old cancer patient, meets and falls in love with Gus Waters, a similarly afflicted teen from her cancer support group. Hazel feels that Gus really understands her. They both share the same acerbic wit and a love of books, especially Grace's touchstone, An Imperial Affliction by Peter Van Houten. When Gus scores an invitation to meet the reclusive author, he and Hazel embark on the adventure of their brief lives."
+    "Description": "Hazel Grace Lancaster, a 16-year-old cancer patient, meets and falls in love with Gus Waters, a similarly afflicted teen from her cancer support group. Hazel feels that Gus really understands her. They both share the same acerbic wit and a love of books, especially Grace's touchstone, An Imperial Affliction by Peter Van Houten. When Gus scores an invitation to meet the reclusive author, he and Hazel embark on the adventure of their brief lives.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "19",
     "Cover": "cover19",
     "Title": "The Book Thief",
     "Author": "Markus Zusak",
-    "Description": "The Book Thief is a story narrated by a compassionate Death who tells us about Liesel, a girl growing up in Germany during World War II. She steals books, learns to read, and finds comfort in words. She and Max, the Jew her family protects, are the only main characters that survive the war."
+    "Description": "The Book Thief is a story narrated by a compassionate Death who tells us about Liesel, a girl growing up in Germany during World War II. She steals books, learns to read, and finds comfort in words. She and Max, the Jew her family protects, are the only main characters that survive the war.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "20",
     "Cover": "cover20",
     "Title": "Perfume",
     "Author": "Patrick Süskind",
-    "Description": "The novel explores the sense of smell and its relationship with the emotional meanings that scents may have. The story follows Jean-Baptiste Grenouille, an unloved orphan in 18th-century France who is born with an exceptional sense of smell, capable of distinguishing a vast range of scents in the world around him."
+    "Description": "The novel explores the sense of smell and its relationship with the emotional meanings that scents may have. The story follows Jean-Baptiste Grenouille, an unloved orphan in 18th-century France who is born with an exceptional sense of smell, capable of distinguishing a vast range of scents in the world around him.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "21",
     "Cover": "cover21",
     "Title": "Fourth Wing",
     "Author": "Rebecca Yarros",
-    "Description": "Set at Basgiath War College in the fictional country of Navarre, the novel follows twenty-year-old Violet Sorrengail. Having trained her whole life to become a scribe – members of the college responsible for documenting history – she expects to enter the school's Scribe Quadrant."
+    "Description": "Set at Basgiath War College in the fictional country of Navarre, the novel follows twenty-year-old Violet Sorrengail. Having trained her whole life to become a scribe – members of the college responsible for documenting history – she expects to enter the school's Scribe Quadrant.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "22",
     "Cover": "cover22",
     "Title": "Tom Lake",
     "Author": "Ann Patchett",
-    "Description": "Tom Lake is set in 2020, the first year of the COVID pandemic. Lara Nelson, her husband, Joe, and their daughters, Emily, Maisie, and Nell, retreat to isolation on the family farm in northern Michigan, where they work to bring in the first harvest of their cherry orchard."
+    "Description": "Tom Lake is set in 2020, the first year of the COVID pandemic. Lara Nelson, her husband, Joe, and their daughters, Emily, Maisie, and Nell, retreat to isolation on the family farm in northern Michigan, where they work to bring in the first harvest of their cherry orchard.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "23",
     "Cover": "cover23",
     "Title": "Too Late",
     "Author": "Colleen Hoover",
-    "Description": "Too Late is a 2016 romance/psychological thriller by Colleen Hoover. Narrated in first person through various points of view, it tells the story of Sloan, Luke (whose undercover name is Carter), and their entanglements with the abusive drug dealer Asa Jackson."
+    "Description": "Too Late is a 2016 romance/psychological thriller by Colleen Hoover. Narrated in first person through various points of view, it tells the story of Sloan, Luke (whose undercover name is Carter), and their entanglements with the abusive drug dealer Asa Jackson.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "24",
     "Cover": "cover24",
     "Title": "Atomic Habits",
     "Author": "James Clear",
-    "Description": "Atomic Habits by James Clear is a comprehensive, practical guide on how to change your habits and get 1% better every day. Using a framework called the Four Laws of Behavior Change, Atomic Habits teaches readers a simple set of rules for creating good habits and breaking bad ones."
+    "Description": "Atomic Habits by James Clear is a comprehensive, practical guide on how to change your habits and get 1% better every day. Using a framework called the Four Laws of Behavior Change, Atomic Habits teaches readers a simple set of rules for creating good habits and breaking bad ones.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "25",
     "Cover": "cover25",
     "Title": "A Court of Thorns and Roses",
     "Author": "Sarah J. Mass",
-    "Description": "A Court of Thorns and Roses by Sarah J. Maas is a fantasy romance novel that follows Feyre, a 19-year-old huntress, and her journey to save her family from a faerie world where she falls for the High Lord of the Spring Court."
+    "Description": "A Court of Thorns and Roses by Sarah J. Maas is a fantasy romance novel that follows Feyre, a 19-year-old huntress, and her journey to save her family from a faerie world where she falls for the High Lord of the Spring Court.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "26",
     "Cover": "cover26",
     "Title": "It Ends With Us",
     "Author": "Colleen Hoover",
-    "Description": "It Ends with Us is a book that follows a girl named Lily who has just moved and is ready to start her life after college. Lily then meets a guy named Ryle and she falls for him. As she is developing feelings for Ryle, Atlas, her first love, reappears and challenges the relationship between Lily and Ryle."
+    "Description": "It Ends with Us is a book that follows a girl named Lily who has just moved and is ready to start her life after college. Lily then meets a guy named Ryle and she falls for him. As she is developing feelings for Ryle, Atlas, her first love, reappears and challenges the relationship between Lily and Ryle.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "27",
     "Cover": "cover27",
     "Title": "IceBreaker",
     "Author": "Hannah Grace",
-    "Description": "Grace's novel is a hockey romance, which is a subgenre of the new adult romance genre. The story follows the developing relationship between hockey player Nathan Hawkins and figure skater Anastasia Allen, two likely enemies who navigate their respective athletic and college careers while falling in love."
+    "Description": "Grace's novel is a hockey romance, which is a subgenre of the new adult romance genre. The story follows the developing relationship between hockey player Nathan Hawkins and figure skater Anastasia Allen, two likely enemies who navigate their respective athletic and college careers while falling in love.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "28",
     "Cover": "cover28",
     "Title": "The House Maid",
     "Author": "Freida McFadden",
-    "Description": "Overview. The Housemaid (2023) is a twisted tale of manipulation, deceit, and survival. In the latest psychological thriller by Freida McFadden, ex-convict Millie becomes the maid for the wealthy Winchester family. It was the only job she could find, but there's something odd about Nina, her new employer."
+    "Description": "Overview. The Housemaid (2023) is a twisted tale of manipulation, deceit, and survival. In the latest psychological thriller by Freida McFadden, ex-convict Millie becomes the maid for the wealthy Winchester family. It was the only job she could find, but there's something odd about Nina, her new employer.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "29",
     "Cover": "cover29",
     "Title": "It Starts With Us",
     "Author": "Colleen Hoover",
-    "Description": "In “It Starts With Us,” Atlas and Lily attempt to rekindle the love they felt for each other as teenagers, but must deal with the repercussions their love may have now as adults. Hoover illustrates a beautiful, innocent love between Atlas and Lily."
+    "Description": "In “It Starts With Us,” Atlas and Lily attempt to rekindle the love they felt for each other as teenagers, but must deal with the repercussions their love may have now as adults. Hoover illustrates a beautiful, innocent love between Atlas and Lily.",
+    "Status": "NONE",
+        "Stars": 0
   },
   {
     "Book": "30",
     "Cover": "cover30",
     "Title": "American Prometheus",
     "Author": "Kai Bird and Martin J. Sherwin",
-    "Description": "American Prometheus draws from Oppenheimer's own writings, years of FBI surveillance records, and interviews with some of his closest friends and peers. It paints a gripping portrait of the 'father of the atomic bomb', who was ostracised by the political establishment of the very country he strove to protect."
+    "Description": "American Prometheus draws from Oppenheimer's own writings, years of FBI surveillance records, and interviews with some of his closest friends and peers. It paints a gripping portrait of the 'father of the atomic bomb', who was ostracised by the political establishment of the very country he strove to protect.",
+    "Status": "NONE",
+        "Stars": 0
   },
 ]
