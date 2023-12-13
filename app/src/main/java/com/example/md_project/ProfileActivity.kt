@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -39,7 +38,6 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.md_project.ui.theme.Book
-import com.example.md_project.ui.theme.BookStatus
 import com.example.md_project.ui.theme.BookViewModel
 import com.example.md_project.ui.theme.readBooksFromAssets
 

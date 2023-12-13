@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
+    //  Variables for the button click and the stars
     var selectedButton by mutableStateOf("none")
     var selectedStars by mutableStateOf(0)
 
@@ -25,13 +26,22 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     // Functions to add books to different categories
     fun addToToRead(book: Book) {
+        // Create a copy of the original book
         val newBook = book.copy()
+
+        // Changes the status to TO_READ
         newBook.status = BookStatus.TO_READ
+
+        // Add to the var toReadBooks and remove from the others
         toReadBooks.value.add(newBook)
         readingBooks.value.remove(newBook)
         readBooks.value.remove(newBook)
+
+        // Update the button status
         selectedButton = "To Read"
         updateBookStatus(newBook, BookStatus.TO_READ)
+
+        // Save changes to book data
         saveBookData()
     }
 
@@ -85,6 +95,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     // Function to save book data to SharedPreferences
     private fun saveBookData() {
+        // Creates a map containing the value of each category
         val bookData = mapOf(
             "toRead" to toReadBooks.value,
             "reading" to readingBooks.value,
@@ -93,8 +104,10 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             "selectedStars" to selectedStars
         )
 
+        // Converts map into a Json String using Gson
         val jsonString = Gson().toJson(bookData)
 
+        // Stores data in the shared preferences
         val sharedPref = getApplication<Application>().getSharedPreferences(
             sharedPreferencesKey, Context.MODE_PRIVATE
         )
@@ -108,6 +121,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     // Function to load book data from SharedPreferences
     private fun loadBookData() {
+        //Shared preferences is accessed to retrieve the store Json string
         val sharedPref = getApplication<Application>().getSharedPreferences(
             sharedPreferencesKey, Context.MODE_PRIVATE
         )

@@ -1,6 +1,7 @@
 package com.example.md_project.ui.theme
 
 data class Book(
+    //Defining the structure of a book
     var title: String,
     var cover: String,
     var author: String,
